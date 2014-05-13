@@ -44,6 +44,13 @@ module SessionsHelper
   
     # Before filters
 
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
+
     def already_signed_in
       unless !signed_in?
         redirect_to root_url, notice: "Already logged in"
